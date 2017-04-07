@@ -7,14 +7,18 @@ export PATH=~/Library/Scripts:$PATH
 export LANG=${LANG:-en_US.UTF-8}
 export LC_ALL=${LC_ALL:-en_US.UTF-8}
 
+export ANDROID_HOME=~/Library/Android/sdk
 export OKAPI_HOME=/Applications/Okapi_0.32
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export ECLIPSE_HOME=/Applications/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/EmacsMac.app/Contents/MacOS
-export PATH=$ECLIPSE_HOME:$OKAPI_HOME:$PATH
+export GEM_HOME=$HOME/.gem
+export PATH=$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$PATH
 
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec=$EMACS_HOME/bin/emacsclient
+
+export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
 export TESSDATA_PREFIX=/opt/local/share
 
@@ -46,3 +50,4 @@ alias c="peco-cd ~/Code"
 alias mysql-start="sudo port load mysql56-server"
 alias mysql-stop="sudo port unload mysql56-server"
 alias http-server="twistd -no web --path=."
+alias handbrake="/Applications/HandBrake.app/Contents/MacOS/HandBrake"
