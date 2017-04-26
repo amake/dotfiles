@@ -35,6 +35,11 @@ function docker-clean() {
     docker rmi $(docker images | grep '^<none>' | awk '{print $3}')
 }
 
+function port-clean() {
+    while sudo port uninstall leaves; do true; done
+    sudo port reclaim
+}
+
 function peco-cd() {
     TRG="$1"
     [[ -z "$TRG" ]] && TRG=.
