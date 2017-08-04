@@ -51,6 +51,19 @@ function activate-java-7() {
     echo "JAVA_HOME=$JAVA_HOME"
 }
 
+function adb-screencap() {
+    OUTFILE=android-$(date +%s).png
+    SDK_VER=$(adb shell getprop ro.build.version.sdk | tr -d '\n\r')
+    if (( "$SDK_VER" >= 24 )); then
+        adb shell screencap -p > $OUTFILE
+    else
+        # Prior to Android 7.0 the shell corrupted PNG output
+        # with EOL conversion. See:
+        # http://blog.shvetsov.com/2013/02/grab-android-screenshot-to-computer-via.html
+        adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $OUTFILE
+    fi
+}
+
 alias c="peco-cd ~/Code"
 alias mysql-start="sudo port load mysql56-server"
 alias mysql-stop="sudo port unload mysql56-server"
