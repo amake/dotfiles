@@ -64,6 +64,10 @@ function adb-screencap() {
     fi
 }
 
+function qrcode() {
+    qrencode -o - "$*" | open -f -a Preview
+}
+
 alias c="peco-cd ~/Code"
 alias mysql-start="sudo port load mysql56-server"
 alias mysql-stop="sudo port unload mysql56-server"
