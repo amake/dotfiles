@@ -47,7 +47,11 @@ function peco-cd() {
 }
 
 function activate-java-7() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+    activate-java 1.7
+}
+
+function activate-java() {
+    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
     echo "JAVA_HOME=$JAVA_HOME"
 }
 
