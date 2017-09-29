@@ -8,7 +8,7 @@ export LANG=${LANG:-en_US.UTF-8}
 export LC_ALL=${LC_ALL:-en_US.UTF-8}
 
 export ANDROID_HOME=~/Library/Android/sdk
-export OKAPI_HOME=/Applications/Okapi_0.32
+export OKAPI_HOME=/Applications/MacPorts/Okapi
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export ECLIPSE_HOME=/Applications/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/EmacsMac.app/Contents/MacOS
