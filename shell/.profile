@@ -18,6 +18,9 @@ export PATH=$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$PATH
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec=$EMACS_HOME/bin/emacsclient
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
 export TESSDATA_PREFIX=/opt/local/share
