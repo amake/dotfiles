@@ -17,6 +17,7 @@ export PATH=$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$PATH:$ANDROID_HOME/platform
 
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec=$EMACS_HOME/bin/emacsclient
+alias e="$EMACS_HOME/bin/emacsclient -n"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
