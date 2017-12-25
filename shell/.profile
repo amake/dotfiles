@@ -2,7 +2,7 @@
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # Local scripts
-export PATH=~/bin:$PATH
+export PATH=~/bin:PATH:~/local/bin:$PATH
 
 export LANG=${LANG:-en_US.UTF-8}
 export LC_ALL=${LC_ALL:-en_US.UTF-8}
