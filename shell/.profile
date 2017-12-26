@@ -50,7 +50,7 @@ function peco-cd() {
     cd "$TRG/$(ls "$TRG" | peco)"
 }
 
-function activate-java-7() {
+function activate-java7() {
     activate-java 1.7
 }
 
