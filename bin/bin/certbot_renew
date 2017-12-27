@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -eu
+
+certbot renew
+
+DOMAIN=${1:-$(hostname)}
+LIVE="${LETSENCRYPT_HOME}/live"
+pem2keychain "$LIVE/$DOMAIN"

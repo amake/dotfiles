@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -eu
+
+DOMAIN=${1:-$(hostname)}
+certbot certonly -d $DOMAIN
+
+LIVE="${LETSENCRYPT_HOME}/live"
+pem2keychain "$LIVE/$DOMAIN"
