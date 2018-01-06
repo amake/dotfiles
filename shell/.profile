@@ -45,8 +45,7 @@ function port-clean() {
 }
 
 function peco-cd() {
-    TRG="$1"
-    [[ -z "$TRG" ]] && TRG=.
+    TRG="${1:-.}"
     cd "$TRG/$(ls "$TRG" | peco)"
 }
 
