@@ -12,8 +12,9 @@ export OKAPI_HOME=/Applications/MacPorts/Okapi
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export ECLIPSE_HOME=/Applications/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/EmacsMac.app/Contents/MacOS
+export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/bin
 export GEM_HOME=$HOME/.gem
-export PATH=$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$FONTFORGE_HOME
 
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec=$EMACS_HOME/bin/emacsclient
