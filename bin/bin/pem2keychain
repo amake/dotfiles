@@ -5,12 +5,12 @@ ROOT="${1:-.}"
 
 PASSWORD=$(openssl rand -base64 45 | tr -d /=+ | cut -c -30)
 openssl pkcs12 -export \
-  -inkey "$ROOT/privkey.pem" \
-  -in "$ROOT/cert.pem" \
-  -certfile "$ROOT/fullchain.pem" \
-  -out "$ROOT/letsencrypt_sslcert.p12" \
-  -passout pass:$PASSWORD
+    -inkey "$ROOT/privkey.pem" \
+    -in "$ROOT/cert.pem" \
+    -certfile "$ROOT/fullchain.pem" \
+    -out "$ROOT/letsencrypt_sslcert.p12" \
+    -passout pass:$PASSWORD
 security import "$ROOT/letsencrypt_sslcert.p12" -f pkcs12 \
-  -k /Library/Keychains/System.keychain \
-  -P $PASSWORD \
-  -T /Applications/Server.app/Contents/ServerRoot/System/Library/CoreServices/ServerManagerDaemon.bundle/Contents/MacOS/servermgrd
+    -k /Library/Keychains/System.keychain \
+    -P $PASSWORD \
+    -T /Applications/Server.app/Contents/ServerRoot/System/Library/CoreServices/ServerManagerDaemon.bundle/Contents/MacOS/servermgrd

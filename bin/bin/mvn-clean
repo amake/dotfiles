@@ -6,19 +6,19 @@ M2_REPO=${HOME}/.m2
 OLDFILES=/tmp/deleted_artifacts.txt
 AGE=195
 
-echo "==== To be Deleted Jars ====" >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*jar' -type f -atime +${AGE} >> ${OLDFILES}
+echo "==== To be Deleted Jars ====" >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*jar' -type f -atime +${AGE} >>${OLDFILES}
 
-echo "==== To be Deleted Wars/Ears ====" >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*war' -type f -atime +${AGE} >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*ear' -type f -atime +${AGE} >> ${OLDFILES}
+echo "==== To be Deleted Wars/Ears ====" >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*war' -type f -atime +${AGE} >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*ear' -type f -atime +${AGE} >>${OLDFILES}
 
-echo "==== To be Deleted APKs ====" >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apk' -type f -atime +${AGE} >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apksources' -type f -atime +${AGE} >> ${OLDFILES}
-find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apklib' -type f -atime +${AGE} >> ${OLDFILES}
+echo "==== To be Deleted APKs ====" >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apk' -type f -atime +${AGE} >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apksources' -type f -atime +${AGE} >>${OLDFILES}
+find "${M2_REPO}" -path '*SNAPSHOT*' -name '*apklib' -type f -atime +${AGE} >>${OLDFILES}
 
-echo "==== Empty Directories ====" >> ${OLDFILES}
-find "${M2_REPO}" -type d -empty >> ${OLDFILES}
+echo "==== Empty Directories ====" >>${OLDFILES}
+find "${M2_REPO}" -type d -empty >>${OLDFILES}
 
-for x in `cat ${OLDFILES}`; do rm -rf "$x"; done
+for x in $(cat ${OLDFILES}); do rm -rf "$x"; done
