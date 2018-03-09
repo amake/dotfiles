@@ -1,3 +1,5 @@
+# -*- sh-shell: bash; -*-
+
 # MacPorts
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
