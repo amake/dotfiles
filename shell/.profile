@@ -75,6 +75,16 @@ function dl-m3u8() {
     )
 }
 
+function git-fetch-all() {
+    for repo in ~/Code/*/.git/..; do
+        (
+            cd "$repo"
+            echo -n "$(basename $(pwd)): "
+            git fetch --all
+        )
+    done
+}
+
 alias c="peco-cd ~/Code"
 alias mysql-start="sudo port load mysql56-server"
 alias mysql-stop="sudo port unload mysql56-server"
