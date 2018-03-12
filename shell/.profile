@@ -32,9 +32,10 @@ export TESSDATA_PREFIX=/opt/local/share
 [ -f ~/.profile_local ] && . ~/.profile_local
 
 function launch() {
-    cd ~
-    nohup "$@" 2>&1 >/dev/null &
-    cd - >/dev/null
+    (
+        cd ~
+        nohup "$@" 2>&1 >/dev/null &
+    )
 }
 
 function docker-clean() {
