@@ -38,11 +38,6 @@ function launch() {
     )
 }
 
-function docker-clean() {
-    docker rm $(docker ps -a -q)
-    docker rmi $(docker images | grep '^<none>' | awk '{print $3}')
-}
-
 function port-clean() {
     while sudo port uninstall leaves; do true; done
     sudo port reclaim
