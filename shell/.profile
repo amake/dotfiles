@@ -72,6 +72,13 @@ function git-diff-html() {
     git diff --color --word-diff-regex=$REGEX "$@" | ansi2html
 }
 
+function dl-m3u8() {
+    (
+        set -u
+        ffmpeg -i "$1" -c copy -bsf:a aac_adtstoasc "${2:-output.mp4}"
+    )
+}
+
 alias c="peco-cd ~/Code"
 alias mysql-start="sudo port load mysql56-server"
 alias mysql-stop="sudo port unload mysql56-server"
