@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -eu
+
+# OCR an image and use the result for Spotlight indexing.
+# Inspired by:
+# https://gist.github.com/pnc/b7fb38d70f157cd40595d9e52bebc055
+#
+# Required packages (MacPorts):
+# - tesseract
+# - tesseract-eng, etc.
+# - xmlstarlet
+# - ImageMagick
+
+debug=false
+
+if [ "$1" = "-v" ]; then
+    debug=true
+    shift
+fi
+
+function processOne() {
+    img="$1"
+    [ "$debug" = "true" ] && echo "Indexing ${img}"
+
+    contents=$(convert "$img" -magnify -alpha remove - \
+                   | tesseract -c language_model_penalty_non_dict_word=0.8 stdin stdout -l eng \
+                   | xmlstarlet esc)
+
+    [ "$debug" = "true" ] && echo $contents
+
+    hex=$((cat <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<string>$contents</string>
+</plist>
+EOF
+          ) | plutil -convert binary1 - -o - | xxd -p | tr -d '\n')
+    xattr -w -x com.apple.metadata:kMDItemFinderComment "$hex" "$img"
+    mdimport "$img"
+}
+
+for arg in "$@"; do
+    processOne "$arg"
+done
