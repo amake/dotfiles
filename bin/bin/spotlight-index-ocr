@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -eu
 
 # OCR an image and use the result for Spotlight indexing.
 # Inspired by:
@@ -10,6 +9,8 @@ set -eu
 # - tesseract-eng, etc.
 # - xmlstarlet
 # - ImageMagick
+
+set -euo pipefail
 
 debug=false
 
