@@ -92,6 +92,8 @@ alias mysql-stop="sudo port unload mysql56-server"
 alias http-server="twistd -no web --path=."
 alias handbrake="/Applications/HandBrake.app/Contents/MacOS/HandBrake"
 
-# SSH via Yubikey
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
+if [[ "$useYubikey" == "true" ]]; then
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi
