@@ -43,6 +43,10 @@ function port-clean() {
     sudo port reclaim
 }
 
+function port-my-livecheck() {
+    port livecheck maintainer:@amake epwutil
+}
+
 function peco-cd() {
     TRG="${1:-.}"
     cd "$TRG/$(ls "$TRG" | peco)"
