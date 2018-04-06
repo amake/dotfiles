@@ -49,7 +49,8 @@ function port-my-livecheck() {
 
 function peco-cd() {
     trg="${1:-.}"
-    cd "$trg/$(ls "$trg" | peco)"
+    sel="$(ls "$trg" | peco)"
+    [ ! -z "$sel" ] && cd "$trg/$sel"
 }
 
 function activate-java7() {
