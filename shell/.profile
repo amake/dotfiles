@@ -91,6 +91,21 @@ function git-fetch-all() {
     done
 }
 
+function code-clean-all() {
+    function _clean-one() {
+        for proj in "$CODE_HOME"/*/$1; do
+            (
+                cd "$(dirname "$proj")"
+                $2
+            )
+        done
+    }
+    _clean-one build.xml "ant clean"
+    _clean-one pom.xml "mvn clean"
+    _clean-one gradlew "./gradlew clean"
+    unset -f _clean-one
+}
+
 function activate-yubikey() {
     export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
