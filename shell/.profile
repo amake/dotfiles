@@ -73,6 +73,18 @@ function git-diff-html() {
     git diff --color --word-diff-regex=$regex "$@" | ansi2html
 }
 
+function unique-name() {
+    local candidate="$1"
+    local base="${candidate%%.*}"
+    [ "$candidate" != "$base" ] && ext=".${candidate##*.}"
+    local suffix=1
+    while [ -e "$candidate" ]; do
+        candidate="$base$suffix$ext"
+        ((suffix++))
+    done
+    echo "$candidate"
+}
+
 function dl-m3u8() {
     (
         set -u
