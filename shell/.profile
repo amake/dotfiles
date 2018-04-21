@@ -89,7 +89,8 @@ function dl-m3u8() {
     (
         set -u
         local useragent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0'
-        ffmpeg -user_agent "$useragent" -i "$1" -c copy -bsf:a aac_adtstoasc "${2:-output.mp4}"
+        local outfile="${2:-$(unique-name output.mp4)}"
+        ffmpeg -user_agent "$useragent" -i "$1" -c copy -bsf:a aac_adtstoasc "$outfile"
     )
 }
 
