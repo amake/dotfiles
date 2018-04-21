@@ -48,8 +48,8 @@ function port-my-livecheck() {
 }
 
 function peco-cd() {
-    trg="${1:-.}"
-    sel="$(ls "$trg" | peco)"
+    local trg="${1:-.}"
+    local sel="$(ls "$trg" | peco)"
     [ ! -z "$sel" ] && cd "$trg/$sel"
 }
 
@@ -68,7 +68,7 @@ function qrcode() {
 
 function git-diff-html() {
     # https://www.w3.org/International/questions/qa-forms-utf-8
-    regex='[\x0-\x7E]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2}'
+    local regex='[\x0-\x7E]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2}'
     # ansi2html is in the `ansi2html-cli` npm package
     git diff --color --word-diff-regex=$regex "$@" | ansi2html
 }
@@ -76,7 +76,7 @@ function git-diff-html() {
 function dl-m3u8() {
     (
         set -u
-        useragent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0'
+        local useragent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0'
         ffmpeg -user_agent "$useragent" -i "$1" -c copy -bsf:a aac_adtstoasc "${2:-output.mp4}"
     )
 }
