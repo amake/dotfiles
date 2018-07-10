@@ -44,7 +44,7 @@ function port-clean() {
 }
 
 function port-my-livecheck() {
-    port livecheck maintainer:@amake epwutil
+    port livecheck maintainer:amake
 }
 
 function peco-cd() {
