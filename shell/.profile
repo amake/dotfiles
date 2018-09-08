@@ -49,7 +49,7 @@ function port-clean() {
 }
 
 function port-my-livecheck() {
-    port livecheck maintainer:amake
+    port livecheck maintainer:amake emacs-mac-app
 }
 
 function peco-cd() {
