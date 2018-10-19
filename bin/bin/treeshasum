@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Traverse supplied directory trees (or CWD if omitted) and output the SHA1
+# checksum of each regular file. When a file can't be checksummed, output a
+# dummy checksum instead. Results can be verified with `shasum -c`.
+
+find "${@:-.}" -type f | while read file; do
+    shasum "$file" 2>/dev/null || echo "########################################  $file"
+done
