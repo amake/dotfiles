@@ -2,8 +2,78 @@
 
 # Traverse supplied directory trees (or CWD if omitted) and output the SHA1
 # checksum of each regular file. When a file can't be checksummed, output a
-# dummy checksum instead. Results can be verified with `shasum -c`.
+# dummy checksum instead. Results can be verified with `treeshasum -c`.
 
-find "${@:-.}" -type f | while read file; do
-    shasum "$file" 2>/dev/null || echo "########################################  $file"
+function usage() {
+    cat <<EOF
+usage: $(basename $0) [OPTION] [FILE ...]
+Print or check SHA checksums for directory tree(s), with file modification
+date checking.
+
+With no FILE, check here ("."). With -cC and no FILE, read standard input.
+
+  -c  read SHA sums and dates from the FILEs and check only modified files
+  -C  read SHA sums from the FILEs and check all files
+
+  -h  display this help and exit
+EOF
+}
+
+function filterChanged() {
+    while read -r line; do
+        read -r checkdate checksum checkpath <<<"$line"
+        realdate=$(stat -f '%m' "$checkpath")
+        if (($realdate > $checkdate)); then
+            echo "$line"
+        fi
+    done <"${@:-/dev/stdin}"
+}
+
+function check() {
+    awk <"${@:-/dev/stdin}" '{print $2 "  " $3}' | shasum -c
+}
+
+function checkChanged() {
+    changed=$(filterChanged "$@")
+    if [ ! -z "$changed" ]; then
+        echo "$changed" | check
+    else
+        echo "No changed files to check"
+    fi
+}
+
+function doSum() {
+    timepad=$(($(date +%s | wc -c) - 1))
+
+    find "${@:-.}" -type f | while read -r file; do
+        date=$(stat -f "%0${timepad}m" "$file")
+        sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
+        echo "$date  $sum"
+    done
+}
+
+while getopts hcC opt; do
+    case $opt in
+    h)
+        usage
+        exit 0
+        ;;
+    c)
+        shift
+        checkChanged "$@"
+        exit 0
+        ;;
+    C)
+        shift
+        check "$@"
+        exit 0
+        ;;
+    \?)
+        usage
+        exit 1
+        ;;
+    esac
 done
+
+# No flags specified; do default
+doSum "$@"
