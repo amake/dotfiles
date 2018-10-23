@@ -14,6 +14,8 @@ With no FILE, check here ("."). With -cCl and no FILE, read standard input.
 
   -c  read SHA sums and dates from the FILEs and check only modified files
   -C  read SHA sums from the FILEs and check all files
+  -u  read paths from the first FILE and checksum new files present in remaining
+   FILES
   -l  read dates from FILEs and print those that have been modified
 
   -h  display this help and exit
@@ -48,6 +50,14 @@ function findAll() {
     find "${@:-.}" -type f
 }
 
+function findNew() {
+    manifest="$1"
+    shift
+    known=$(cut -d' ' -f5- "$manifest")
+    all=$(find "${@:-.}" -type f)
+    echo -e "$known\n$all" | sort | uniq -u
+}
+
 function doSum() {
     timepad=$(($(date +%s | wc -c) - 1))
 
@@ -58,7 +68,7 @@ function doSum() {
     done <"${@:-/dev/stdin}"
 }
 
-while getopts hcCl opt; do
+while getopts hcClu opt; do
     case $opt in
     h)
         usage
@@ -77,6 +87,11 @@ while getopts hcCl opt; do
     l)
         shift
         filterChanged "$@"
+        exit 0
+        ;;
+    u)
+        shift
+        findNew "$@" | doSum
         exit 0
         ;;
     \?)
