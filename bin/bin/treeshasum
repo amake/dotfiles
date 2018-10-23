@@ -10,10 +10,11 @@ usage: $(basename $0) [OPTION] [FILE ...]
 Print or check SHA checksums for directory tree(s), with file modification
 date checking.
 
-With no FILE, check here ("."). With -cC and no FILE, read standard input.
+With no FILE, check here ("."). With -cCl and no FILE, read standard input.
 
   -c  read SHA sums and dates from the FILEs and check only modified files
   -C  read SHA sums from the FILEs and check all files
+  -l  read dates from FILEs and print those that have been modified
 
   -h  display this help and exit
 EOF
@@ -53,7 +54,7 @@ function doSum() {
     done
 }
 
-while getopts hcC opt; do
+while getopts hcCl opt; do
     case $opt in
     h)
         usage
@@ -67,6 +68,11 @@ while getopts hcC opt; do
     C)
         shift
         check "$@"
+        exit 0
+        ;;
+    l)
+        shift
+        filterChanged "$@"
         exit 0
         ;;
     \?)
