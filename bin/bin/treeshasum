@@ -44,14 +44,18 @@ function checkChanged() {
     fi
 }
 
+function findAll() {
+    find "${@:-.}" -type f
+}
+
 function doSum() {
     timepad=$(($(date +%s | wc -c) - 1))
 
-    find "${@:-.}" -type f | while read -r file; do
+    while read -r file; do
         date=$(stat -f "%0${timepad}m" "$file")
         sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
         echo "$date  $sum"
-    done
+    done <"${@:-/dev/stdin}"
 }
 
 while getopts hcCl opt; do
@@ -83,4 +87,4 @@ while getopts hcCl opt; do
 done
 
 # No flags specified; do default
-doSum "$@"
+findAll "$@" | doSum
