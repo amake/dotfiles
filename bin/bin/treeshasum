@@ -30,7 +30,8 @@ function filterChanged() {
 }
 
 function check() {
-    awk <"${@:-/dev/stdin}" '{print $2 "  " $3}' | shasum -c
+    # Caution! Delimeter is two spaces, so start from third field
+    cut <"${@:-/dev/stdin}" -d' ' -f3- | shasum -c
 }
 
 function checkChanged() {
