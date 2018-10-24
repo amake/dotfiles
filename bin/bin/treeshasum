@@ -57,14 +57,19 @@ function findNew() {
     echo -e "$known\n$all" | sort | uniq -u
 }
 
-function doSum() {
-    timepad=$(($(date +%s | wc -c) - 1))
-
+function doSums() {
     while read -r file; do
-        date=$(stat -f "%0${timepad}m" "$file")
-        sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
-        echo "$date  $sum"
+        doSum "$file"
     done <"${@:-/dev/stdin}"
+}
+
+timepad=$(($(date +%s | wc -c) - 1))
+
+function doSum() {
+    file="$1"
+    date=$(stat -f "%0${timepad}m" "$file")
+    sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
+    echo "$date  $sum"
 }
 
 while getopts hcCu opt; do
@@ -85,7 +90,7 @@ while getopts hcCu opt; do
         ;;
     u)
         shift
-        findNew "$@" | doSum
+        findNew "$@" | doSums
         exit 0
         ;;
     \?)
@@ -96,4 +101,4 @@ while getopts hcCu opt; do
 done
 
 # No flags specified; do default
-findAll "$@" | doSum
+findAll "$@" | doSums
