@@ -23,11 +23,18 @@ With no FILE, check here ("."). With -cCl and no FILE, read standard input.
 EOF
 }
 
+function newerThan() {
+    checkpath="$1"
+    checkdate="$2"
+    realdate=$(stat -f '%m' "$checkpath")
+    (($realdate > $checkdate))
+    return
+}
+
 function filterChanged() {
     while read -r line; do
         read -r checkdate checksum checkpath <<<"$line"
-        realdate=$(stat -f '%m' "$checkpath")
-        if (($realdate > $checkdate)); then
+        if newerThan "$checkpath" "$checkdate"; then
             echo "$line"
         fi
     done <"${@:-/dev/stdin}"
