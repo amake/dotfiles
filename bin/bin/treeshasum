@@ -42,8 +42,6 @@ function checkChanged() {
     changed=$(filterChanged "$@")
     if [ ! -z "$changed" ]; then
         echo "$changed" | check
-    else
-        echo "No changed files to check"
     fi
 }
 
