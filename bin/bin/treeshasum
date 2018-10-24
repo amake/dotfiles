@@ -75,17 +75,22 @@ function updateManifest() {
 function updateKnown() {
     while read -r line; do
         read -r checkdate checksum checkpath <<<"$line"
-        if newerThan "$checkpath" "$checkdate"; then
-            doSum "$checkpath"
-        else
-            echo "$line"
+        if [ -f "$checkpath" ]; then
+            if newerThan "$checkpath" "$checkdate"; then
+                doSum "$checkpath"
+            else
+                echo "$line"
+            fi
         fi
+        # Skip deleted files
     done <"${@:-/dev/stdin}"
 }
 
 function doSums() {
     while read -r file; do
-        doSum "$file"
+        if [ -f "$file" ]; then
+            doSum "$file"
+        fi
     done <"${@:-/dev/stdin}"
 }
 
