@@ -16,8 +16,7 @@ With no FILE, check here ("."). With -cCl and no FILE, read standard input.
 
   -c  read SHA sums and dates from the FILEs and check only modified files
   -C  read SHA sums from the FILEs and check all files
-  -u  read paths from the first FILE and checksum new files present in remaining
-   FILES
+  -u  update an existing output file, skipping unmodified files
 
   -h  display this help and exit
 EOF
@@ -69,6 +68,21 @@ function findNew() {
     echo -e "$known\n$all" | sort | uniq -u
 }
 
+function updateManifest() {
+    sort -k 3 <(updateKnown "$@") <(findNew "$@" | doSums)
+}
+
+function updateKnown() {
+    while read -r line; do
+        read -r checkdate checksum checkpath <<<"$line"
+        if newerThan "$checkpath" "$checkdate"; then
+            doSum "$checkpath"
+        else
+            echo "$line"
+        fi
+    done <"${@:-/dev/stdin}"
+}
+
 function doSums() {
     while read -r file; do
         doSum "$file"
@@ -102,7 +116,7 @@ while getopts hcCu opt; do
         ;;
     u)
         shift
-        findNew "$@" | doSums
+        updateManifest "$@"
         exit 0
         ;;
     \?)
