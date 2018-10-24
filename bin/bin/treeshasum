@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Traverse supplied directory trees (or CWD if omitted) and output the SHA1
 # checksum of each regular file. When a file can't be checksummed, output a
 # dummy checksum instead. Results can be verified with `treeshasum -c`.
