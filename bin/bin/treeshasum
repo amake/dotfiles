@@ -49,11 +49,16 @@ function findAll() {
     find "${@:-.}" -type f
 }
 
+function manifestFiles() {
+    # Caution! Delimeter is two spaces, so start from fifth field
+    cut -d' ' -f5- "${@:--}"
+}
+
 function findNew() {
     manifest="$1"
     shift
-    known=$(cut -d' ' -f5- "$manifest")
-    all=$(find "${@:-.}" -type f)
+    known=$(manifestFiles "$manifest")
+    all=$(findAll "$@")
     echo -e "$known\n$all" | sort | uniq -u
 }
 
