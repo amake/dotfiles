@@ -16,7 +16,6 @@ With no FILE, check here ("."). With -cCl and no FILE, read standard input.
   -C  read SHA sums from the FILEs and check all files
   -u  read paths from the first FILE and checksum new files present in remaining
    FILES
-  -l  read dates from FILEs and print those that have been modified
 
   -h  display this help and exit
 EOF
@@ -68,7 +67,7 @@ function doSum() {
     done <"${@:-/dev/stdin}"
 }
 
-while getopts hcClu opt; do
+while getopts hcCu opt; do
     case $opt in
     h)
         usage
@@ -82,11 +81,6 @@ while getopts hcClu opt; do
     C)
         shift
         check "$@"
-        exit 0
-        ;;
-    l)
-        shift
-        filterChanged "$@"
         exit 0
         ;;
     u)
