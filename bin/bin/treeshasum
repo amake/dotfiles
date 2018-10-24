@@ -53,7 +53,7 @@ function checkChanged() {
 }
 
 function findAll() {
-    find "${@:-.}" -type f
+    find "${@:-.}" -type f | sort
 }
 
 function manifestFiles() {
