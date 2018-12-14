@@ -81,7 +81,7 @@ function git-diff-html() {
 function unique-name() {
     local candidate="$1"
     local base="${candidate%%.*}"
-    [ "$candidate" != "$base" ] && ext=".${candidate##*.}"
+    [ "$candidate" != "$base" ] && local ext=".${candidate##*.}"
     local suffix=1
     while [ -e "$candidate" ]; do
         candidate="$base$suffix$ext"
