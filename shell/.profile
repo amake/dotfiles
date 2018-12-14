@@ -124,6 +124,14 @@ function code-clean-all() {
     unset -f _clean-one
 }
 
+function uncroph() {
+    local img="$1"
+    local base="${img%%.*}"
+    local ext=".${img##*.}"
+    local out="$base-uncrop$ext"
+    convert "$img" -blur 128x64 -resize 200% "$img" -gravity center -composite -crop 100x50% "$out"
+}
+
 function activate-yubikey() {
     export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
