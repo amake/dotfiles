@@ -18,6 +18,10 @@ export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/b
 export GEM_HOME=$HOME/.gem
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$FONTFORGE_HOME
 
+export FLUTTER_HOME=/Applications/flutter
+export DART_HOME=$FLUTTER_HOME/bin/cache/dart-sdk
+export PATH=$FLUTTER_HOME/bin:$DART_HOME/bin:$HOME/.pub-cache/bin:$PATH
+
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec=$EMACS_HOME/bin/emacsclient
 alias e="$EMACS_HOME/bin/emacsclient -n"
