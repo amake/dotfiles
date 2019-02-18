@@ -31,8 +31,6 @@ export PATH=$PATH:$GOPATH/bin
 
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
-export TESSDATA_PREFIX=/opt/local/share
-
 if [ ! -z $WINDOW ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
 fi
