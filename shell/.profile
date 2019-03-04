@@ -45,7 +45,6 @@ function launch() {
 }
 
 function port-clean() {
-    while sudo port uninstall leaves; do true; done
     sudo port clean --all installed
     sudo port reclaim
 }
