@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 relpaths() {
-    for arg in "$@"; do printf "%s\n" ${arg#$PWD/}; done
+    for arg in "$@"; do printf -- "%s\n" ${arg#$PWD/}; done
 }
 
 exec docker run --rm -i -v $PWD:/work amake/innosetup $(relpaths "$@")
