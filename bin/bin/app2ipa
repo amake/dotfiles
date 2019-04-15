@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if (($# == 0)) || (($# > 2)); then
+    cat <<EOF
+usage: $(basename "$0") APP [DEST]
+
+Create a .ipa of APP at DEST. When DEST not supplied, it will be placed
+alongside APP.
+EOF
+    exit 1
+fi
+
+realpath() {
+    echo "$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")"
+}
+
+tmpname="$(basename "$0")"
+tmpdir=$(mktemp -d /tmp/${tmpname}.XXXXXX) || exit 1
+trap "rm -r $tmpdir" EXIT
+
+app="$(realpath "$1")"
+appname="$(basename "$app")"
+defaultdest="${app%%.app}.ipa"
+shift
+
+dest="$(realpath "${1:-$defaultdest}")"
+shift
+
+cd $tmpdir
+mkdir Payload
+ln -s "$app" "Payload/$appname"
+
+rm -f "$dest"
+echo -n "Building $dest ... "
+zip -qr "$dest" .
+
+echo "done"
