@@ -6,7 +6,7 @@ set -euo pipefail
 # checksum of each regular file. When a file can't be checksummed, output a
 # dummy checksum instead. Results can be verified with `treeshasum -c`.
 
-function usage() {
+usage() {
     cat <<EOF
 usage: $(basename $0) [OPTION] [FILE ...]
 Print or check SHA checksums for directory tree(s), with file modification
@@ -22,15 +22,15 @@ With no FILE, check here ("."). With -cCl and no FILE, read standard input.
 EOF
 }
 
-function newerThan() {
-    checkpath="$1"
-    checkdate="$2"
-    realdate=$(stat -f '%m' "$checkpath")
+newerThan() {
+    local checkpath="$1"
+    local checkdate="$2"
+    local realdate=$(stat -f '%m' "$checkpath")
     (($realdate > $checkdate))
     return
 }
 
-function filterChanged() {
+filterChanged() {
     while read -r line; do
         read -r checkdate checksum checkpath <<<"$line"
         if newerThan "$checkpath" "$checkdate"; then
@@ -39,40 +39,40 @@ function filterChanged() {
     done <"${@:-/dev/stdin}"
 }
 
-function check() {
+check() {
     # Caution! Delimeter is two spaces, so start from third field
     cut <"${@:-/dev/stdin}" -d' ' -f3- | shasum -c
 }
 
-function checkChanged() {
-    changed=$(filterChanged "$@")
+checkChanged() {
+    local changed=$(filterChanged "$@")
     if [ ! -z "$changed" ]; then
         echo "$changed" | check
     fi
 }
 
-function findAll() {
+findAll() {
     find "${@:-.}" -type f | sort
 }
 
-function manifestFiles() {
+manifestFiles() {
     # Caution! Delimeter is two spaces, so start from fifth field
     cut -d' ' -f5- "${@:--}"
 }
 
-function findNew() {
-    manifest="$1"
+findNew() {
+    local manifest="$1"
     shift
-    known=$(manifestFiles "$manifest")
-    all=$(findAll "$@")
+    local known=$(manifestFiles "$manifest")
+    local all=$(findAll "$@")
     echo -e "$known\n$all" | sort | uniq -u
 }
 
-function updateManifest() {
+updateManifest() {
     sort -k 3 <(updateKnown "$@") <(findNew "$@" | doSums)
 }
 
-function updateKnown() {
+updateKnown() {
     while read -r line; do
         read -r checkdate checksum checkpath <<<"$line"
         if [ -f "$checkpath" ]; then
@@ -86,7 +86,7 @@ function updateKnown() {
     done <"${@:-/dev/stdin}"
 }
 
-function doSums() {
+doSums() {
     while read -r file; do
         if [ -f "$file" ]; then
             doSum "$file"
@@ -96,10 +96,10 @@ function doSums() {
 
 timepad=$(($(date +%s | wc -c) - 1))
 
-function doSum() {
-    file="$1"
-    date=$(stat -f "%0${timepad}m" "$file")
-    sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
+doSum() {
+    local file="$1"
+    local date=$(stat -f "%0${timepad}m" "$file")
+    local sum=$(shasum "$file" 2>/dev/null || echo "########################################  $file")
     echo "$date  $sum"
 }
 
