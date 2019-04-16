@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>444.4</string>
+	<string>444.42</string>
 	<key>AMApplicationVersion</key>
-	<string>2.8</string>
+	<string>2.9</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -61,9 +61,9 @@
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/Applications/MacPorts/EmacsMac.app/Contents/MacOS/bin:$PATH
 app=$(lsappinfo info $(lsappinfo front) -only name | sed -E 's/.*="(.*)"/\1/')
-tmp=$(mktemp)
+tmp=$(mktemp /tmp/editinemacs.XXXXXX) || exit 1
 cat &gt; $tmp
-emacsclient -c $tmp &amp;&gt; /dev/null
+emacsclient -c $tmp &gt;/dev/null 2&gt;&amp;1
 cat $tmp
 open -a "$app"</string>
 					<key>CheckedForUserDefaultShell</key>
@@ -178,9 +178,9 @@ open -a "$app"</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>527.500000:253.000000</string>
+				<string>520.500000:305.000000</string>
 				<key>nibPath</key>
-				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<true/>
@@ -190,12 +190,28 @@ open -a "$app"</string>
 	<dict/>
 	<key>workflowMetaData</key>
 	<dict>
+		<key>applicationBundleIDsByPath</key>
+		<dict/>
+		<key>applicationPaths</key>
+		<array/>
+		<key>inputTypeIdentifier</key>
+		<string>com.apple.Automator.text</string>
+		<key>outputTypeIdentifier</key>
+		<string>com.apple.Automator.text</string>
+		<key>presentationMode</key>
+		<integer>11</integer>
+		<key>processesInput</key>
+		<integer>0</integer>
 		<key>serviceInputTypeIdentifier</key>
 		<string>com.apple.Automator.text</string>
 		<key>serviceOutputTypeIdentifier</key>
 		<string>com.apple.Automator.text</string>
 		<key>serviceProcessesInput</key>
 		<integer>0</integer>
+		<key>systemImageName</key>
+		<string>NSTouchBarCompose</string>
+		<key>useAutomaticInputType</key>
+		<integer>1</integer>
 		<key>workflowTypeIdentifier</key>
 		<string>com.apple.Automator.servicesMenu</string>
 	</dict>
