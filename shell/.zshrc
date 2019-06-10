@@ -11,3 +11,5 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+export PROMPT='%m:%1~ %n%% '
