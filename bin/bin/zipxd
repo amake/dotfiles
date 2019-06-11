@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if (($# != 1)) || [ ! -d "$1" ]; then
+    echo "usage: $(basename "$0") exploded-xd-dir"
+    exit 1
+fi
+
+# This order is important!
+XD_CONTENTS="mimetype manifest META-INF artwork/artboard* artwork/pasteboard interactions preview.png renditions resources thumbnail.png"
+
+TARGET="$1.xd"
+cd "$1"
+zip -rXD - $XD_CONTENTS >"$TARGET"
