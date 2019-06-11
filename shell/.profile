@@ -37,50 +37,50 @@ fi
 
 [ -f ~/.profile_local ] && . ~/.profile_local
 
-function launch() {
+launch() {
     (
         cd ~
         nohup "$@" 2>&1 >/dev/null &
     )
 }
 
-function port-clean() {
+port-clean() {
     sudo port clean --all installed
     sudo port reclaim
 }
 
-function port-my-livecheck() {
+port-my-livecheck() {
     port livecheck maintainer:amake emacs-mac-app \
         libusbmuxd-devel libimobiledevice-devel ideviceinstaller-devel
 }
 
-function peco-cd() {
+peco-cd() {
     local trg="${1:-.}"
     local sel="$(ls "$trg" | peco)"
     [ ! -z "$sel" ] && cd "$trg/$sel"
 }
 
-function activate-java7() {
+activate-java7() {
     activate-java 1.7
 }
 
-function activate-java() {
+activate-java() {
     export JAVA_HOME=$(/usr/libexec/java_home -v $1)
     echo "JAVA_HOME=$JAVA_HOME"
 }
 
-function qrcode() {
+qrcode() {
     qrencode -o - "$*" | open -f -a Preview
 }
 
-function git-diff-html() {
+git-diff-html() {
     # https://www.w3.org/International/questions/qa-forms-utf-8
     local regex='[\x0-\x7E]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2}'
     # ansi2html is in the `ansi2html-cli` npm package
     git diff --color --word-diff-regex=$regex "$@" | ansi2html
 }
 
-function unique-name() {
+unique-name() {
     local candidate="$1"
     local base="${candidate%%.*}"
     [ "$candidate" != "$base" ] && local ext=".${candidate##*.}"
@@ -92,7 +92,7 @@ function unique-name() {
     echo "$candidate"
 }
 
-function dl-m3u8() {
+dl-m3u8() {
     (
         set -u
         local useragent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0'
@@ -101,7 +101,7 @@ function dl-m3u8() {
     )
 }
 
-function git-fetch-all() {
+git-fetch-all() {
     for repo in "$CODE_HOME"/*/.git/..; do
         (
             cd "$repo"
@@ -111,7 +111,7 @@ function git-fetch-all() {
     done
 }
 
-function code-clean-all() {
+code-clean-all() {
     function _clean-one() {
         for proj in "$CODE_HOME"/*/$1; do
             (
@@ -126,7 +126,7 @@ function code-clean-all() {
     unset -f _clean-one
 }
 
-function uncroph() {
+uncroph() {
     local img="$1"
     local base="${img%%.*}"
     local ext=".${img##*.}"
@@ -134,7 +134,7 @@ function uncroph() {
     convert "$img" -blur 128x64 -resize 200% "$img" -gravity center -composite -crop 100x50% "$out"
 }
 
-function activate-yubikey() {
+activate-yubikey() {
     export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 }
