@@ -13,3 +13,7 @@ compinit
 # End of lines added by compinstall
 
 export PROMPT='%m:%1~ %n%% '
+
+# Case-insensitive completion
+# https://qiita.com/watertight/items/2454f3e9e43ef647eb6b
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
