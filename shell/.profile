@@ -59,7 +59,7 @@ port-my-livecheck() {
 peco-cd() {
     local trg="${1:-.}"
     local sel
-    sel="$(find "$trg" -type d -maxdepth 1 | peco)"
+    sel="$(find "$trg" -type d -maxdepth 1 -exec basename -a {} + | peco)"
     [ -n "$sel" ] && cd "$trg/$sel" || return
 }
 
