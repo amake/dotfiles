@@ -11,7 +11,7 @@ export LC_ALL=${LC_ALL:-en_US.UTF-8}
 
 export ANDROID_HOME=~/Library/Android/sdk
 export OKAPI_HOME=/Applications/MacPorts/Okapi
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+JAVA_HOME=$(/usr/libexec/java_home -v 1.8) && export JAVA_HOME
 export ECLIPSE_HOME=$HOME/eclipse/java-latest-released/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/EmacsMac.app/Contents/MacOS
 export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/bin
@@ -23,24 +23,26 @@ export DART_HOME=$FLUTTER_HOME/bin/cache/dart-sdk
 export PATH=$FLUTTER_HOME/bin:$DART_HOME/bin:$HOME/.pub-cache/bin:$PATH
 
 export EDITOR=$EMACS_HOME/bin/emacsclient
-alias ec=$EMACS_HOME/bin/emacsclient
-alias e="$EMACS_HOME/bin/emacsclient -n"
+alias ec='$EMACS_HOME/bin/emacsclient'
+alias e='$EMACS_HOME/bin/emacsclient -n'
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
-if [ ! -z $WINDOW ]; then
+if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
 fi
+
+useYubikey=false
 
 [ -f ~/.profile_local ] && . ~/.profile_local
 
 launch() {
     (
-        cd ~
-        nohup "$@" 2>&1 >/dev/null &
+        cd ~ || exit
+        nohup "$@" >/dev/null 2>&1 &
     )
 }
 
@@ -56,8 +58,9 @@ port-my-livecheck() {
 
 peco-cd() {
     local trg="${1:-.}"
-    local sel="$(ls "$trg" | peco)"
-    [ ! -z "$sel" ] && cd "$trg/$sel"
+    local sel
+    sel="$(find "$trg" -type d -maxdepth 1 | peco)"
+    [ -n "$sel" ] && cd "$trg/$sel" || return
 }
 
 activate-java7() {
@@ -65,7 +68,7 @@ activate-java7() {
 }
 
 activate-java() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+    JAVA_HOME=$(/usr/libexec/java_home -v "$1") && export JAVA_HOME
     echo "JAVA_HOME=$JAVA_HOME"
 }
 
@@ -104,8 +107,8 @@ dl-m3u8() {
 git-fetch-all() {
     for repo in "$CODE_HOME"/*/.git/..; do
         (
-            cd "$repo"
-            echo -n "$(basename $(pwd)): "
+            cd "$repo" || return
+            echo -n "$(basename "$PWD"): "
             git fetch --all
         )
     done
@@ -113,9 +116,9 @@ git-fetch-all() {
 
 code-clean-all() {
     function _clean-one() {
-        for proj in "$CODE_HOME"/*/$1; do
+        for proj in "$CODE_HOME"/*/"$1"; do
             (
-                cd "$(dirname "$proj")"
+                cd "$(dirname "$proj")" || return
                 $2
             )
         done
@@ -135,11 +138,11 @@ uncroph() {
 }
 
 activate-yubikey() {
-    export GPG_TTY=$(tty)
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    GPG_TTY=$(tty) && export GPG_TTY
+    SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && export SSH_AUTH_SOCK
 }
 
-alias c="peco-cd '$CODE_HOME'"
+alias c='peco-cd "$CODE_HOME"'
 alias handbrake="/Applications/HandBrake.app/Contents/MacOS/HandBrake"
 
 # SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
