@@ -28,8 +28,6 @@ alias e='$EMACS_HOME/bin/emacsclient -n'
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:$DYLD_FALLBACK_LIBRARY_PATH
-
 if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
 fi
@@ -142,7 +140,7 @@ activate-yubikey() {
 }
 
 alias c='peco-cd "$CODE_HOME"'
-alias handbrake="/Applications/HandBrake.app/Contents/MacOS/HandBrake"
+alias handbrake='DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH /Applications/HandBrake.app/Contents/MacOS/HandBrake'
 
 # SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
 [[ "$useYubikey" == "true" ]] && activate-yubikey
