@@ -49,8 +49,7 @@ port-clean() {
 }
 
 port-my-livecheck() {
-    port livecheck maintainer:amake emacs-mac-app \
-        libusbmuxd-devel libimobiledevice-devel ideviceinstaller-devel
+    port livecheck maintainer:amake emacs-mac-app
 }
 
 peco-cd() {
