@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-OUTFILE=android-$(date +%s).png
-SDK_VER=$(adb shell getprop ro.build.version.sdk | tr -d '\n\r')
-if (($SDK_VER >= 24)); then
-    adb shell screencap -p >$OUTFILE
+outfile=android-$(date +%s).png
+sdk_ver=$(adb shell getprop ro.build.version.sdk | tr -d '\n\r')
+if ((sdk_ver >= 24)); then
+    adb shell screencap -p >"$outfile"
 else
     # Prior to Android 7.0 the shell corrupted PNG output
     # with EOL conversion. See:
     # http://blog.shvetsov.com/2013/02/grab-android-screenshot-to-computer-via.html
-    adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' >$OUTFILE
+    adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' >"$outfile"
 fi
 
-echo $OUTFILE
+echo "$outfile"
