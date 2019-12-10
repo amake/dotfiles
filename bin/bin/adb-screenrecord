@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+    adb shell screenrecord --help
+    exit 1
+fi
+
+outfile="${@:$(($#))}"
+outext="${outfile##*.}"
+outbase="${outfile%%.*}"
+
+set -- "${@:1:$(($# - 1))}"
+
+i=0
+while true; do
+    adb shell screenrecord "$@" "$outbase-$((i++)).$outext"
+    sleep 1
+done
