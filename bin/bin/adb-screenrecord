@@ -14,7 +14,15 @@ outbase="${outfile%%.*}"
 set -- "${@:1:$(($# - 1))}"
 
 i=0
+uniqueFile() {
+    while true; do
+        result="$outbase-$((i++)).$outext"
+        [ ! -e "$result" ] && break
+    done
+    echo "$result"
+}
+
 while true; do
-    outpart="$outbase-$((i++)).$outext"
+    outpart="$(uniqueFile)"
     adb exec-out screenrecord "$@" --output-format=h264 - | ffmpeg -i - -c:v copy -f mp4 "$outpart"
 done
