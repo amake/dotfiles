@@ -44,7 +44,7 @@ launch() {
 }
 
 port-clean() {
-    sudo port clean --all installed
+    sudo port clean -f --all installed
     sudo port reclaim
 }
 
