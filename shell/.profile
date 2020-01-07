@@ -15,8 +15,7 @@ JAVA_HOME=$(/usr/libexec/java_home -v 1.8) && export JAVA_HOME
 export ECLIPSE_HOME=$HOME/eclipse/java-latest-released/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/EmacsMac.app/Contents/MacOS
 export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/bin
-export GEM_HOME=$HOME/.gem
-export PATH=$PATH:$ANDROID_HOME/platform-tools:$ECLIPSE_HOME:$OKAPI_HOME:$GEM_HOME/bin:$FONTFORGE_HOME
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ECLIPSE_HOME:$OKAPI_HOME:$FONTFORGE_HOME
 
 export FLUTTER_HOME=/Applications/flutter
 export PATH=$FLUTTER_HOME/bin:$HOME/.pub-cache/bin:$PATH
@@ -150,3 +149,6 @@ alias handbrake='DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH /Applicatio
 
 # SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
 [[ "$useYubikey" == "true" ]] && activate-yubikey
+
+gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
+export PATH="$gem_home/bin:$PATH"
