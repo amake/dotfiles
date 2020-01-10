@@ -27,7 +27,7 @@ alias e='$EMACS_HOME/bin/emacsclient -n'
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-export RIPGREP_CONFIG_PATH=~
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
