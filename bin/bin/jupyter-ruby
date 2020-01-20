@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-workdir="$HOME/.jupyter/"
+workdir="$HOME/Documents/jupyter/"
 
 mkdir -p "$workdir"
 
-exec docker run -p 8888:8888 -v "$workdir":/work rubydata/datascience-notebook
+exec docker run --rm \
+    -p 8888:8888 \
+    -v "$workdir":/home/jovyan/work \
+    rubydata/datascience-notebook
