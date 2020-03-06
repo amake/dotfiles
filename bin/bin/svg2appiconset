@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+outdir=AppIcon.appiconset
+
+if [ -e $outdir ]; then
+    echo "$outdir already exists. Exiting."
+    exit 1
+fi
+
+mkdir -p "$outdir"
+
+icon_name() {
+    echo "Icon-App-${1}x${1}@${2}x.png"
+}
+
+sizes=(1024@1
+    20@1
+    20@2
+    20@3
+    29@1
+    29@2
+    29@3
+    40@1
+    40@2
+    40@3
+    60@2
+    60@3
+    76@1
+    76@2
+    83.5@2)
+
+for size in "${sizes[@]}"; do
+    px=${size%@*}
+    mult=${size#*@}
+    real_pix=$(bc <<<"$px * $mult")
+    inkscape --file="$1" \
+        --export-width=$real_pix \
+        --export-height=$real_pix \
+        --export-png="$outdir/$(icon_name "$px" "$mult")"
+done
