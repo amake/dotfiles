@@ -21,3 +21,14 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:
 # Bash-style word navigation/editing
 autoload -U select-word-style
 select-word-style bash
+
+# Search history with peco
+function peco-history-selection() {
+    BUFFER=$(history -n 1 | tail -r | awk '!a[$0]++' | peco)
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+if command -v peco >/dev/null; then
+    zle -N peco-history-selection
+    bindkey '^R' peco-history-selection
+fi
