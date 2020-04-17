@@ -49,6 +49,10 @@ port-clean() {
     sudo port reclaim
 }
 
+port-edit() {
+    $EDITOR "$(port file "$1")"
+}
+
 port-my-livecheck() {
     port livecheck maintainer:amake emacs-mac-app
 }
