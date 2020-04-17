@@ -127,6 +127,7 @@ code-clean-all() {
     _clean-one build.xml "ant clean"
     _clean-one pom.xml "mvn clean"
     _clean-one gradlew "./gradlew clean"
+    _clean-one .dart_tool "flutter clean"
     unset -f _clean-one
 }
 
