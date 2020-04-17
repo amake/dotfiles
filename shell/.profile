@@ -120,7 +120,7 @@ code-clean-all() {
         for proj in "$CODE_HOME"/*/"$1"; do
             (
                 cd "$(dirname "$proj")" || return
-                $2
+                eval "$2"
             )
         done
     }
