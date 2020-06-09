@@ -4,6 +4,10 @@
     "M-C-8": "peco.DeleteBackwardWord",
     "M-d": "peco.DeleteForwardWord",
     "M-f": "peco.ForwardWord",
-    "M-b": "peco.BackwardWord"
+    "M-b": "peco.BackwardWord",
+    "C-v": "peco.ScrollPageDown",
+    "M-v": "peco.ScrollPageUp",
+    "M-<": "peco.ScrollFirstItem",
+    "M->": "peco.ScrollLastItem"
   }
 }
