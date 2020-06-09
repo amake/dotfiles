@@ -29,6 +29,9 @@ export PATH=$PATH:$GOPATH/bin
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
+export PATH="$gem_home/bin:$PATH"
+
 if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
 fi
@@ -156,6 +159,3 @@ alias handbrake='DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH /Applicatio
 
 # SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
 [[ "$useYubikey" == "true" ]] && activate-yubikey
-
-gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
-export PATH="$gem_home/bin:$PATH"
