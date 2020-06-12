@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Live-preview REPL with fzf; see
+# https://github.com/pawelduda/fzf-live-repl
+
+echo '' | fzf --print-query --preview 'ruby -r csv -r json -e {q}'
