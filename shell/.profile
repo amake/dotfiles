@@ -53,7 +53,18 @@ port-clean() {
 }
 
 port-edit() {
-    $EDITOR "$(port file "$1")"
+    if (($# < 1)); then
+        return 1
+    fi
+    local portfile
+    portfile="$(port file "$1")"
+    local content
+    content="$(cat "$portfile")"
+    $EDITOR "$portfile"
+    if diff <(echo "$content") "$portfile" | grep -qE 'version|revision|epoch|\.setup'; then
+        echo "Version changed; bumping..."
+        sudo port bump "$1"
+    fi
 }
 
 port-my-livecheck() {
