@@ -8,6 +8,7 @@
     "C-v": "peco.ScrollPageDown",
     "M-v": "peco.ScrollPageUp",
     "M-<": "peco.ScrollFirstItem",
-    "M->": "peco.ScrollLastItem"
+    "M->": "peco.ScrollLastItem",
+    "C-k": "peco.KillEndOfLine"
   }
 }
