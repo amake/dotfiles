@@ -165,6 +165,11 @@ activate-yubikey() {
     SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && export SSH_AUTH_SOCK
 }
 
+fd() {
+    local dir
+    dir=$(find "${1:-.}" -type d 2>/dev/null | fzf +m) && cd "$dir" || return
+}
+
 alias c='peco-cd "$CODE_HOME"'
 alias handbrake='DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH /Applications/HandBrake.app/Contents/MacOS/HandBrake'
 
