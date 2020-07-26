@@ -47,11 +47,6 @@ launch() {
     )
 }
 
-port-clean() {
-    sudo port clean -f --all installed
-    sudo port reclaim
-}
-
 port-edit() {
     if (($# < 1)); then
         return 1
