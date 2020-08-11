@@ -32,6 +32,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
 export PATH="$gem_home/bin:$PATH"
 
+eval "$(rbenv init -)"
+
 if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
 fi
@@ -167,6 +169,8 @@ fd() {
 
 alias c='peco-cd "$CODE_HOME"'
 alias handbrake='DYLD_LIBRARY_PATH=/opt/local/lib:$DYLD_LIBRARY_PATH /Applications/HandBrake.app/Contents/MacOS/HandBrake'
+
+alias be='bundle exec'
 
 # SSH via Yubikey; enable by setting useYubikey=true in ~/.profile_local
 [[ "$useYubikey" == "true" ]] && activate-yubikey
