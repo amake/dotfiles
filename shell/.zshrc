@@ -32,3 +32,7 @@ if command -v peco >/dev/null; then
     zle -N peco-history-selection
     bindkey '^R' peco-history-selection
 fi
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
