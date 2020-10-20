@@ -8,3 +8,9 @@
 	user = amake
 [diff]
 	colorMoved = default
+[sendemail]
+    smtpserver = smtp.googlemail.com
+    smtpencryption = tls
+    smtpserverport = 587
+    smtpuser = aaron@madlon-kay.com
+	confirm = auto
