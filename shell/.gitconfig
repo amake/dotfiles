@@ -6,3 +6,5 @@
 	attributesfile = ~/.gitattributes
 [github]
 	user = amake
+[diff]
+	colorMoved = default
