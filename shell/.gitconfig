@@ -1,9 +1,6 @@
 [user]
 	name = Aaron Madlon-Kay
 	email = aaron@madlon-kay.com
-[core]
-	excludesfile = ~/.gitignore_global
-	attributesfile = ~/.gitattributes
 [github]
 	user = amake
 [diff]
