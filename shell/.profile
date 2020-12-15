@@ -77,6 +77,7 @@ peco-cd() {
 }
 
 activate-java() {
+    unset JAVA_HOME # Workaround for Big Sur weirdness
     JAVA_HOME=$(/usr/libexec/java_home -v "$1") && export JAVA_HOME
     echo "JAVA_HOME=$JAVA_HOME"
 }
