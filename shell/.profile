@@ -76,10 +76,6 @@ peco-cd() {
     [ -n "$sel" ] && cd "$trg/$sel" || return
 }
 
-activate-java7() {
-    activate-java 1.7
-}
-
 activate-java() {
     JAVA_HOME=$(/usr/libexec/java_home -v "$1") && export JAVA_HOME
     echo "JAVA_HOME=$JAVA_HOME"
