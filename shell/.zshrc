@@ -53,10 +53,6 @@ vterm_printf() {
     fi
 }
 
-if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
-fi
-
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
 
@@ -66,3 +62,10 @@ vterm_prompt_end() {
 
 setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+
+    # Sync initial buffer name
+    cd .
+fi
