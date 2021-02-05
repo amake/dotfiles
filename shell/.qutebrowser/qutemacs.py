@@ -46,7 +46,7 @@ c.bindings.commands['insert'] = {
     '<backspace>': 'fake-key <backspace>;;mode-leave',
     '<alt-x>': 'mode-leave;;set-cmd-text :',
     '<alt-o>': 'mode-leave;;tab-focus last',
-    '<Tab>': 'fake-key <f1>'
+    # '<Tab>': 'fake-key <f1>'
 }
 
 
@@ -73,8 +73,8 @@ for symb in [',', '.', '/', '\'', ';', '[', ']', '\\',
 c.bindings.commands['normal'] = {
     # Navigation
     '<ctrl-space>': 'mode-enter insert',
-    '<ctrl-]>': 'fake-key <Ctrl-Shift-Right>',
-    '<ctrl-[>': 'fake-key <Ctrl-Shift-Left>',
+    # '<ctrl-]>': 'fake-key <Ctrl-Shift-Right>',
+    # '<ctrl-[>': 'fake-key <Ctrl-Shift-Left>',
     '<ctrl-v>': 'scroll-page 0 0.5',
     '<alt-v>': 'scroll-page 0 -0.5',
     '<ctrl-shift-v>': 'scroll-page 0 1',
@@ -95,8 +95,10 @@ c.bindings.commands['normal'] = {
     '<alt-s>': 'hint all',
 
     # tabs
-    '<ctrl-tab>': 'tab-next',
-    '<ctrl-shift-tab>': 'tab-prev',
+    # '<ctrl-tab>': 'tab-next',
+    # '<ctrl-shift-tab>': 'tab-prev',
+    '<ctrl-]>': 'tab-next',
+    '<ctrl-[>': 'tab-prev',
 
     # open links
     '<ctrl-l>': 'set-cmd-text -s :open',
@@ -112,6 +114,10 @@ c.bindings.commands['normal'] = {
     '<ctrl-b>': 'fake-key <Left>',
     '<alt-o>': 'tab-focus last',
     '<ctrl-a>': 'fake-key <Home>',
+    # These don't work because of
+    # https://github.com/qutebrowser/qutebrowser/issues/3736
+    # '<alt-shift-less>': 'fake-key <Home>',
+    # '<alt-shift-greater>': 'fake-key <End>',
     '<ctrl-x>h': 'fake-key <Ctrl-a>',
     '<ctrl-e>': 'fake-key <End>',
     '<ctrl-n>': 'fake-key <Down>',
@@ -169,7 +175,7 @@ c.bindings.commands['caret'] = {
 
 config.bind('<Tab>', 'fake-key <f1>')
 config.bind('<Ctrl-x><Ctrl-l>', 'config-source')
-c.tabs.show = 'never'
+# c.tabs.show = 'never'
 c.statusbar.show = 'always'
 c.url.searchengines["g"] = "https://www.google.com.ar/search?q={}"
-c.url.searchengines["DEFAULT"] = "https://www.google.com.ar/search?q={}"
+# c.url.searchengines["DEFAULT"] = "https://www.google.com.ar/search?q={}"
