@@ -32,47 +32,47 @@ c.bindings.default['normal'] = {}
 c.bindings.default['insert'] = {}
 
 c.bindings.commands['insert'] = {
-    '<ctrl-space>': 'leave-mode',
-    '<ctrl-g>': 'leave-mode;;fake-key <Left>;;fake-key <Right>',
+    '<ctrl-space>': 'mode-leave',
+    '<ctrl-g>': 'mode-leave;;fake-key <Left>;;fake-key <Right>',
     '<ctrl-f>': 'fake-key <Shift-Right>',
     '<ctrl-b>': 'fake-key <Shift-Left>',
     '<ctrl-e>': 'fake-key <Shift-End>',
     '<ctrl-a>': 'fake-key <Shift-Home>',
     '<ctrl-p>': 'fake-key <Shift-Up>',
     '<ctrl-n>': 'fake-key <Shift-Down>',
-    '<Return>': 'leave-mode',
-    '<ctrl-w>': 'fake-key <Ctrl-x>;;message-info "cut to clipboard";;leave-mode',
-    '<alt-w>': 'fake-key <Ctrl-c>;;message-info "copy to clipboard";;leave-mode',
-    '<backspace>': 'fake-key <backspace>;;leave-mode',
-    '<alt-x>': 'leave-mode;;set-cmd-text :',
-    '<alt-o>': 'leave-mode;;tab-focus last',
+    '<Return>': 'mode-leave',
+    '<ctrl-w>': 'fake-key <Ctrl-x>;;message-info "cut to clipboard";;mode-leave',
+    '<alt-w>': 'fake-key <Ctrl-c>;;message-info "copy to clipboard";;mode-leave',
+    '<backspace>': 'fake-key <backspace>;;mode-leave',
+    '<alt-x>': 'mode-leave;;set-cmd-text :',
+    '<alt-o>': 'mode-leave;;tab-focus last',
     '<Tab>': 'fake-key <f1>'
 }
 
 
 for char in list(string.ascii_lowercase):
     c.bindings.commands['insert'].update(
-        {char: 'fake-key ' + char + ';;leave-mode'})
+        {char: 'fake-key ' + char + ';;mode-leave'})
 
 for CHAR in list(string.ascii_uppercase):
     c.bindings.commands['insert'].update(
-        {CHAR: 'fake-key ' + char + ';;leave-mode'})
+        {CHAR: 'fake-key ' + char + ';;mode-leave'})
 
 for num in list(map(lambda x: str(x), range(0, 10))):
     c.bindings.commands['insert'].update(
-        {num: 'fake-key ' + num + ';;leave-mode'})
+        {num: 'fake-key ' + num + ';;mode-leave'})
 
 for symb in [',', '.', '/', '\'', ';', '[', ']', '\\',
              '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '`', '~',
              ':', '\"', '<', '>', '?', '{', '}', '|']:
     c.bindings.commands['insert'].update(
-        {symb: 'insert-text ' + symb + ' ;;leave-mode'})
+        {symb: 'insert-text ' + symb + ' ;;mode-leave'})
 
 
 # Bindings
 c.bindings.commands['normal'] = {
     # Navigation
-    '<ctrl-space>': 'enter-mode insert',
+    '<ctrl-space>': 'mode-enter insert',
     '<ctrl-]>': 'fake-key <Ctrl-Shift-Right>',
     '<ctrl-[>': 'fake-key <Ctrl-Shift-Left>',
     '<ctrl-v>': 'scroll-page 0 0.5',
@@ -81,9 +81,9 @@ c.bindings.commands['normal'] = {
     '<alt-shift-v>': 'scroll-page 0 -1',
 
     '<alt-x>': 'set-cmd-text :',
-    '<ctrl-x>b': 'set-cmd-text -s :buffer;;fake-key <Down><Down><Down>',
+    '<ctrl-x>b': 'set-cmd-text -s :tab-select;;fake-key <Down><Down><Down>',
     '<ctrl-x>k': 'tab-close',
-    '<ctrl-x>r': 'config-cycle statusbar.hide',
+    '<ctrl-x>r': 'config-cycle statusbar.show',
     '<ctrl-x>1': 'tab-only;;message-info "cleared all other tabs"',
     '<ctrl-x><ctrl-c>': 'quit',
 
@@ -152,24 +152,24 @@ c.bindings.commands['command'] = {
     '<alt-n>': 'command-history-next',
 
     # escape hatch
-    '<ctrl-g>': 'leave-mode',
+    '<ctrl-g>': 'mode-leave',
 }
 
 c.bindings.commands['hint'] = {
     # escape hatch
-    '<ctrl-g>': 'leave-mode',
+    '<ctrl-g>': 'mode-leave',
 }
 
 
 c.bindings.commands['caret'] = {
     # escape hatch
-    '<ctrl-g>': 'leave-mode',
+    '<ctrl-g>': 'mode-leave',
     '<ctrl-space>': 'toggle-selection'
 }
 
 config.bind('<Tab>', 'fake-key <f1>')
 config.bind('<Ctrl-x><Ctrl-l>', 'config-source')
 c.tabs.show = 'never'
-c.statusbar.hide = False
+c.statusbar.show = 'always'
 c.url.searchengines["g"] = "https://www.google.com.ar/search?q={}"
 c.url.searchengines["DEFAULT"] = "https://www.google.com.ar/search?q={}"
