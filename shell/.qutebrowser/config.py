@@ -121,3 +121,25 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Enable JavaScript.
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
+
+# Editor (and arguments) to use for the `edit-*` commands. The following
+# placeholders are defined:  * `{file}`: Filename of the file to be
+# edited. * `{line}`: Line in which the caret is found in the text. *
+# `{column}`: Column in which the caret is found in the text. *
+# `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
+# Same as `{column}`, but starting from index 0.
+# Type: ShellCommand
+c.editor.command = ['emacsclient', '{file}', '+{line}:{column0}']
+
+# Default zoom level.
+# Type: Perc
+c.zoom.default = '133%'
+
+# Available zoom levels.
+# Type: List of Perc
+c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%',
+                 '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
+
+c.content.notifications = False
+
+c.fonts.default_size = '18pt'
