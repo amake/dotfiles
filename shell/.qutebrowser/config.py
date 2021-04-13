@@ -142,6 +142,6 @@ c.zoom.default = '133%'
 c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%',
                  '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
 
-c.content.notifications = False
+c.content.notifications.enabled = False
 
 c.fonts.default_size = '18pt'
