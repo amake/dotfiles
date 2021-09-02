@@ -15,8 +15,8 @@ realpath() {
 }
 
 tmpname="$(basename "$0")"
-tmpdir=$(mktemp -d /tmp/${tmpname}.XXXXXX) || exit 1
-trap "rm -r $tmpdir" EXIT
+tmpdir=$(mktemp -d "/tmp/$tmpname.XXXXXX") || exit 1
+trap 'rm -r "$tmpdir"' EXIT
 
 app="$(realpath "$1")"
 appname="$(basename "$app")"
@@ -26,7 +26,7 @@ shift
 dest="$(realpath "${1:-$defaultdest}")"
 shift
 
-cd $tmpdir
+cd "$tmpdir" || exit 1
 mkdir Payload
 ln -s "$app" "Payload/$appname"
 
