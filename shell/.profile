@@ -66,7 +66,7 @@ port-edit() {
 }
 
 port-my-livecheck() {
-    port livecheck maintainer:amake emacs-mac-app
+    port -q echo maintainer:amake | xargs -P 0 -n 1 port -q livecheck
 }
 
 peco-cd() {
