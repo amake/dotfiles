@@ -173,7 +173,7 @@ c.bindings.commands['caret'] = {
     '<ctrl-space>': 'toggle-selection'
 }
 
-config.bind('<Tab>', 'fake-key <f1>')
+# config.bind('<Tab>', 'fake-key <f1>')
 config.bind('<Ctrl-x><Ctrl-l>', 'config-source')
 # c.tabs.show = 'never'
 c.statusbar.show = 'always'
