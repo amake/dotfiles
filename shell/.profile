@@ -76,7 +76,7 @@ peco-cd() {
     [ -n "$sel" ] && cd "$trg/$sel" || return
 }
 
-activate-java() {
+java-activate() {
     unset JAVA_HOME # Workaround for Big Sur weirdness
     JAVA_HOME=$(/usr/libexec/java_home -v "$1") && export JAVA_HOME
     echo "JAVA_HOME=$JAVA_HOME"
@@ -155,7 +155,7 @@ beep() {
     done
 }
 
-activate-yubikey() {
+yubikey-activate() {
     GPG_TTY=$(tty) && export GPG_TTY
     SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) && export SSH_AUTH_SOCK
 }
