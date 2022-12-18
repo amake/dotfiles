@@ -151,7 +151,7 @@ uncroph() {
 beep() {
     local n=${1:-1}
     while ((n-- > 0)); do
-        echo -n '\007'
+        printf '\007'
     done
 }
 
