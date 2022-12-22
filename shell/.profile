@@ -124,6 +124,11 @@ git-fetch-all() {
     done
 }
 
+git-prune-merged-branches() {
+    local branch=${1:-master}
+    git branch --merged "$branch" | grep -Ev "^\*? *${branch}" | xargs -n 1 -r git branch -d
+}
+
 code-clean-all() {
     function _clean-one() {
         for proj in "$CODE_HOME"/*/"$1"; do
