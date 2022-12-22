@@ -130,7 +130,7 @@ git-prune-merged-branches() {
 }
 
 code-clean-all() {
-    function _clean-one() {
+    _clean-one() {
         for proj in "$CODE_HOME"/*/"$1"; do
             (
                 cd "$(dirname "$proj")" || return
