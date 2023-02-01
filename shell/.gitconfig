@@ -11,3 +11,5 @@
     smtpserverport = 587
     smtpuser = aaron@madlon-kay.com
 	confirm = auto
+[diff "elisp"]
+    xfuncname = "^\\(((def[^ \t]+|use-package)[ \t]+[^ \t]+).*$"
