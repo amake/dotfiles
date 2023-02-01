@@ -1,3 +1,4 @@
 *.rb diff=ruby
 *.rake diff=ruby
 *.el diff=elisp
+*.org diff=org

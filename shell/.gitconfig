@@ -13,3 +13,5 @@
 	confirm = auto
 [diff "elisp"]
     xfuncname = "^\\(((def[^ \t]+|use-package)[ \t]+[^ \t]+).*$"
+[diff "org"]
+    xfuncname = "^\\*+ +(.*)$"
