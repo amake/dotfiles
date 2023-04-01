@@ -60,8 +60,8 @@ port-edit() {
     $EDITOR "$portfile"
     if diff <(echo "$content") "$portfile" | grep -qE 'version|revision|epoch|\.setup'; then
         echo "Version changed; bumping..."
-        sudo port fetch --no-mirrors "$1"
-        sudo port bump "$1"
+        sudo port -N fetch --no-mirrors "$1"
+        sudo port -N bump "$1"
     fi
 }
 
