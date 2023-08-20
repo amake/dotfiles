@@ -11,7 +11,7 @@ export LC_ALL=${LC_ALL:-en_US.UTF-8}
 
 export ANDROID_HOME=~/Library/Android/sdk
 export OKAPI_HOME=/Applications/MacPorts/Okapi
-JAVA_HOME=$(/usr/libexec/java_home -v 1.8) && export JAVA_HOME
+JAVA_HOME=$(/usr/libexec/java_home -v 11) && export JAVA_HOME
 export ECLIPSE_HOME=$HOME/eclipse/java-latest-released/Eclipse.app/Contents/MacOS
 export EMACS_HOME=/Applications/MacPorts/Emacs.app/Contents/MacOS
 export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/bin
