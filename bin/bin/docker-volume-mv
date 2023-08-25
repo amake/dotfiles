@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if (($# != 2)); then
+    echo "usage: $(basename "$0") <from_volume> <to_volume>"
+    exit 1
+fi
+
+from_volume=$1
+to_volume=$2
+
+label_args=$(docker volume inspect -f '{{range $k, $v := .Labels }}{{$k}} {{$v}} {{end}}' "$from_volume" |
+    xargs -n 2 printf -- '--label %s=%s \n')
+
+# shellcheck disable=SC2086
+docker volume create --name "$to_volume" $label_args
+docker run --rm -it -v "$from_volume":/from -v "$to_volume":/to alpine ash -c "cd /from ; cp -av . /to"
+docker volume rm "$from_volume"
