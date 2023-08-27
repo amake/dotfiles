@@ -54,7 +54,7 @@ port-edit() {
         return 1
     fi
     local portfile
-    portfile="$(port file "$1")"
+    if ! portfile="$(port file "$1")"; then return 1; fi
     local content
     content="$(cat "$portfile")"
     $EDITOR "$portfile"
