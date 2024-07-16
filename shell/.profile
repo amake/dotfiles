@@ -126,7 +126,7 @@ git-fetch-all() {
 
 git-prune-merged-branches() {
     local branch=${1:-$(basename "$(git symbolic-ref refs/remotes/origin/HEAD)")}
-    git branch --merged "$branch" | grep -Ev "^\*|^\*? *${branch}" | xargs -n 1 -r git branch -d
+    git branch --merged "$branch" | grep -Ev "^[*+]|^\*? *${branch}" | xargs -n 1 -r git branch -d
 }
 
 code-clean-all() {
