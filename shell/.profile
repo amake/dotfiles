@@ -29,10 +29,10 @@ export PATH=$PATH:$GOPATH/bin
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+eval "$(rbenv init -)"
+
 gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
 export PATH="$gem_home/bin:$PATH"
-
-eval "$(rbenv init -)"
 
 if [ -n "$WINDOW" ]; then
     PS1="\h[$WINDOW]:\W \u\$ "
