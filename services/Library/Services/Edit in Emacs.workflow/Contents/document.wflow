@@ -59,7 +59,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>export PATH=/Applications/MacPorts/EmacsMac.app/Contents/MacOS/bin:$PATH
+					<string>export PATH=$(echo /Applications/MacPorts/Emacs*.app/Contents/MacOS/bin):$PATH
 app=$(lsappinfo info $(lsappinfo front | sed 's/-/-0x/') -only name | sed -E 's/.*="(.*)"/\1/')
 tmp=$(mktemp /tmp/editinemacs.XXXXXX) || exit 1
 cat &gt; $tmp
