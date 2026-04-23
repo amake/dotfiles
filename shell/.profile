@@ -29,6 +29,8 @@ export PATH=$PATH:$GOPATH/bin
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+export DO_NOT_TRACK=true
+
 eval "$(rbenv init -)"
 
 gem_home="$(ruby -r rubygems -e 'puts Gem.user_dir')"
