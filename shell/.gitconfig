@@ -15,3 +15,5 @@
     xfuncname = "^\\(((def[^ \t]+|use-package)[ \t]+[^ \t]+).*$"
 [diff "org"]
     xfuncname = "^\\*+ +(.*)$"
+[merge]
+	conflictStyle = diff3
