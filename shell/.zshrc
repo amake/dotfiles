@@ -67,7 +67,9 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+fi
 
+if [[ -n "$INSIDE_EMACS" ]]; then
     # Sync initial buffer name
     cd .
 fi
