@@ -18,7 +18,7 @@ export FONTFORGE_HOME=/Applications/FontForge.app/Contents/Resources/opt/local/b
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ECLIPSE_HOME:$OKAPI_HOME:$FONTFORGE_HOME
 
 export FLUTTER_HOME=/Applications/flutter
-export PATH=$FLUTTER_HOME/bin:$HOME/.pub-cache/bin:$PATH
+export PATH=$PATH:$FLUTTER_HOME/bin:$HOME/.pub-cache/bin
 
 export EDITOR=$EMACS_HOME/bin/emacsclient
 alias ec='$EMACS_HOME/bin/emacsclient'
