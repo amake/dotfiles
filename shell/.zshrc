@@ -42,7 +42,9 @@ bindkey "^X^E" edit-command-line
 # Emacs vterm
 
 vterm_printf() {
-    if [ -n "$TMUX" ]; then
+    if [ -n "$TMUX" ] \
+        && { [ "${TERM%%-*}" = "tmux" ] \
+            || [ "${TERM%%-*}" = "screen" ]; }; then
         # Tell tmux to pass the escape sequences through
         printf "\ePtmux;\e\e]%s\007\e\\" "$1"
     elif [ "${TERM%%-*}" = "screen" ]; then
